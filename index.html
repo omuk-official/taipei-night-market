@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>타이베이 먹킷리스트 · 야시장</title>
+<meta name="description" content="직접 먹어 보고 고른 타이베이 맛집·간식·쇼핑 스폿 14곳. 동네와 가까운 MRT역, 실제 주문 메뉴 가격(NT$·원화), 구글 지도 링크까지 한 번에.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="타이베이 먹킷리스트">
+<meta property="og:title" content="타이베이 먹킷리스트 · 야시장">
+<meta property="og:description" content="직접 먹어 보고 고른 타이베이 맛집·간식·쇼핑 스폿 14곳. 동네와 가까운 MRT역, 실제 주문 메뉴 가격(NT$·원화), 구글 지도 링크까지 한 번에.">
+<meta property="og:url" content="https://omuk-official.github.io/taipei-night-market/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#e2412a">
+<link rel="canonical" href="https://omuk-official.github.io/taipei-night-market/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23e2412a'/%3E%3Ctext x='50' y='72' font-size='62' text-anchor='middle' fill='%23ffcb52' font-family='serif' font-weight='900'%3E%E5%8F%B0%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&text=%E8%87%BA%E5%8C%97%E7%BE%8E%E9%A3%9F&display=swap">
+<style>
+/* base */
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;padding:0}
+img{max-width:100%}
+[hidden]:not([hidden=until-found i]){display:none!important}
+</style>
+<style>
+/* Layout: night-market signboards — glowing sign in the hero (vertical on wide screens, a small horizontal plate on phones), sticky category filter bar, signboard cards that lead with where and how much. Single light look on purpose. */
+:root {
+  --bg: #f6f4fa;
+  --surface: #ffffff;
+  --surface-2: #f3eff8;
+  --ink: #221c2e;
+  --muted: #6b6479;
+  --line: #e2dcea;
+  --red: #e2412a;
+  --gold: #ffcb52;
+  --gold-ink: #241a00;
+  --amber: #a86604;
+  --pink: #d6457e;
+  --teal: #13897a;
+  --glow-red: rgba(226, 65, 42, .35);
+  --glow-gold: rgba(255, 203, 82, .7);
+  --font-display: "Black Han Sans", "Noto Sans KR", sans-serif;
+  --font-han: "Noto Serif TC", "Noto Serif KR", serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap {
+  max-width: 1040px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Hero */
+.hero { display: flex; gap: 20px; align-items: stretch; padding-block: 36px 24px; }
+.sign {
+  flex: none; writing-mode: vertical-rl; text-orientation: upright;
+  font-family: var(--font-han); font-weight: 900; font-size: clamp(32px, 9vw, 54px);
+  line-height: 1; letter-spacing: .1em; color: var(--gold);
+  background: var(--red); padding: 16px 10px; border-radius: 8px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 3px var(--red), 0 0 32px var(--glow-red);
+  text-shadow: 0 0 12px var(--glow-gold);
+}
+.hero-text { display: grid; gap: 10px; align-content: end; min-width: 0; }
+.eyebrow { font: 500 12px var(--font-num); letter-spacing: .14em; color: var(--red); }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 8vw, 58px); line-height: 1.1; margin: 0; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 56ch; }
+.rate { font-size: 13px; color: var(--muted); }
+.rate b { font-family: var(--font-num); font-weight: 500; color: var(--red); }
+
+/* Sticky filter bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: grid; gap: 6px; padding-block: 10px; }
+.filters { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.filters::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; font: 700 14px var(--font-body); color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  min-height: 40px; padding: 0 13px; cursor: pointer; display: inline-flex; gap: 7px; align-items: center;
+}
+.chip .n { font: 500 12px var(--font-num); color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+.chip[aria-pressed="true"] .n { color: inherit; opacity: .7; }
+.chip:disabled { opacity: .4; cursor: default; }
+.result { font-size: 13px; color: var(--muted); padding-top: 2px; }
+.result b { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* Cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 14px; padding-block: 18px 24px; align-items: start; scroll-margin-top: 140px; }
+.card { --c: var(--red); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.card[data-cat="카페·디저트"] { --c: var(--pink); }
+.card[data-cat="야시장·간식"] { --c: var(--amber); }
+.card[data-cat="쇼핑"] { --c: var(--teal); }
+.board { background: var(--surface-2); padding: 14px 18px 14px; border-bottom: 2px solid var(--c); display: grid; gap: 4px; }
+.board-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.cat { font: 500 12px var(--font-num); letter-spacing: .1em; color: var(--c); }
+.where { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; color: var(--ink); }
+.where svg { width: 13px; height: 13px; fill: none; stroke: var(--c); stroke-width: 2.2; flex: none; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.25; margin: 0; text-wrap: balance; }
+.sub { display: block; font: 400 13px var(--font-body); color: var(--muted); margin-top: 2px; }
+
+.body { padding: 14px 18px 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.notes { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.notes li { padding-left: 16px; position: relative; }
+.notes li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px var(--c); }
+
+.range { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.range .nt { font: 500 15px var(--font-num); color: var(--amber); }
+.range .kr { font: 500 12px var(--font-num); color: var(--muted); }
+.range .label { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+.menu-wrap { background: var(--bg); border-radius: 8px; }
+.menu-wrap summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  min-height: 40px; padding: 0 12px; font-size: 14px; font-weight: 500;
+}
+.menu-wrap summary::-webkit-details-marker { display: none; }
+.menu-wrap summary svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 2; }
+.menu-wrap[open] summary svg { transform: rotate(180deg); }
+.menu { display: grid; gap: 8px; padding: 0 12px 12px; }
+.single { background: var(--bg); border-radius: 8px; padding: 10px 12px; }
+.row { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; font-size: 14px; }
+.row .item { min-width: 0; }
+.row .price { font-family: var(--font-num); color: var(--amber); white-space: nowrap; text-align: right; }
+.row .krw { grid-column: 2; font: 500 12px var(--font-num); color: var(--muted); text-align: right; white-space: nowrap; }
+
+.map {
+  margin-top: auto; display: flex; justify-content: center; gap: 6px; align-items: center;
+  min-height: 44px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px;
+  color: var(--ink); text-decoration: none; font-weight: 500; font-size: 14px;
+}
+.map:hover { border-color: var(--c); color: var(--c); }
+.map svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 16px; margin: 0; }
+footer { padding-block: 8px 56px; font-size: 13px; color: var(--muted); }
+
+/* Phones: shrink the hero so the first card shows on the first screen */
+@media (max-width: 560px) {
+  .hero { flex-direction: column; gap: 10px; padding-block: 20px 14px; }
+  .sign {
+    align-self: flex-start; writing-mode: horizontal-tb; font-size: 18px; letter-spacing: .2em;
+    padding: 6px 8px 6px 12px; border-width: 2px; border-radius: 6px;
+    box-shadow: 0 0 0 2px var(--red), 0 0 16px var(--glow-red);
+  }
+  .hero-text { gap: 6px; }
+  h1 { font-size: 30px; }
+  .lede { font-size: 14px; }
+  .chip { font-size: 13px; padding: 0 11px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sign { animation: flicker 7s infinite; }
+  @keyframes flicker { 0%, 90%, 100% { opacity: 1; } 91% { opacity: .55; } 92% { opacity: 1; } 94% { opacity: .7; } 95% { opacity: 1; } }
+  .card { transition: border-color .15s; }
+  .card:hover { border-color: var(--c); }
+  .menu-wrap summary svg { transition: transform .2s; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="sign" aria-hidden="true">臺北美食</div>
+    <div class="hero-text">
+      <div class="eyebrow">TAIPEI · 직접 다녀온 곳</div>
+      <h1>타이베이 먹킷리스트</h1>
+      <p class="lede">직접 먹어 보고 고른 맛집과 간식, 쇼핑 스폿이에요.</p>
+      <div class="rate">원화는 <b>1 NT$ ≈ 43원</b>으로 계산한 대략적인 금액이에요.</div>
+    </div>
+  </header>
+</div>
+<div class="bar">
+  <div class="wrap">
+    <div class="filters" id="cat-filters" role="group" aria-label="종류별로 보기"></div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="result" id="result" aria-live="polite"></div>
+  <main class="grid" id="list"></main>
+  <footer>가격은 방문 당시 기준이라 바뀌었을 수 있어요. 가까운 MRT역은 지도 위치를 기준으로 고른 거예요.</footer>
+</div>
+
+<script>
+const RATE = 43;
+// area: 동네, mrt: 가장 가까운 MRT역
+const PLACES = [
+  { name: "딘타이펑 남서점", area: "중산", mrt: "중산역", cat: "식사", url: "https://maps.app.goo.gl/QYhE3eAE5hwdhh1q9", notes: ["무난하게 대만 음식을 즐기기 좋음", "가격대는 좀 있는 편, 매장 깔끔"], menu: [["샤오롱바오 (5개)", 145], ["통새우 돼지고기 샤오마이 (5개)", 210], ["공심채 볶음 (일반)", 280], ["새우 돼지고기 비빔 만두 (매운소스)", 240]] },
+  { name: "하오아 카페", area: "중산", mrt: "솽롄역", cat: "카페·디저트", url: "https://maps.app.goo.gl/v7UQ8a7srP2r2wsh8", notes: ["말차에 진심인 곳", "달달함보다 쌉쌀함이 강해서 호불호 갈릴 수도"], menu: [["말차 크레이프 케이크 (抹茶千層)", 240], ["컴포트 허브티 - 핫 (康福茶 熱)", 120], ["진한 말차 라떼 - 아이스 (特濃抹茶歐蕾 冰)", 240]] },
+  { name: "와일드 bbq", area: "중산", mrt: "중산궈샤오역", cat: "야시장·간식", url: "https://maps.app.goo.gl/T44Tdto87cTSc9wM6", notes: ["다양한 꼬치를 저렴한 가격에 즐길 수 있음", "2차로 오기 좋음"], menu: [["꼬치 (대체로)", "20~44"], ["생맥주", 100]] },
+  { name: "亞當他媽可麗餅", sub: "솽청제 야시장 안 크레페집", area: "중산", mrt: "중산궈샤오역", cat: "카페·디저트", url: "https://maps.app.goo.gl/hSKs4WR14MKxpjAE9", notes: ["대만 스레드에서 핫해진 곳", "크레페가 전병처럼 바삭한 게 특징"], menu: [["누텔라 바나나 크레페", 85]] },
+  { name: "까르푸", area: "완화", mrt: "룽산쓰역", cat: "쇼핑", url: "https://maps.app.goo.gl/CTovbPn1o3XnKuuV6", notes: ["다양한 기념품이나 먹거리 사기 좋음"], menu: [] },
+  { name: "용허또우장", area: "시먼딩", mrt: "시먼역", cat: "식사", url: "https://maps.app.goo.gl/NGWEEAL7nspSpNJa8", notes: ["아침에 간단하게 요우티아오와 두유 즐기기 좋음", "취식 가능하지만 깔끔하지 않으니 테이크아웃 추천"], menu: [["요우티아오 + 두유", 66]] },
+  { name: "진천미", area: "시먼딩", mrt: "시먼역", cat: "식사", url: "https://maps.app.goo.gl/6XTb92tuEhse9guQ8", notes: ["키키레스토랑과 비슷한 메뉴를 더 저렴한 가격에 맛볼 수 있음"], menu: [["오이무침", 70], ["계란두부튀김", 200], ["부추꽃 볶음", 220], ["마요네즈를 곁들인 파인애플과 새우튀김", 340], ["흰쌀밥", 10]] },
+  { name: "우유도넛", area: "시먼딩", mrt: "시먼역", cat: "카페·디저트", url: "https://maps.app.goo.gl/q1XHHNGoD2tme8iY6", notes: ["갓 튀겨낸 도넛에 달달한 우유 가루를 왕창 뿌려주는 곳"], menu: [["우유도넛", 40]] },
+  { name: "아종면선", area: "시먼딩", mrt: "시먼역", cat: "식사", url: "https://maps.app.goo.gl/vU7LzrengfnQ2w7H9", notes: ["가쓰오부시를 우려낸 듯한 감칠맛이 느껴지는 국물", "곱창 양은 많지 않음"], menu: [["곱창국수", 70]] },
+  { name: "행복당", area: "시먼딩", mrt: "시먼역", cat: "카페·디저트", url: "https://maps.app.goo.gl/mGGqQzWRprowiHEr7", notes: ["매장에서 직접 반죽한 타피오카 펄을 쓰는 흑당 버블티 전문점"], menu: [["음료", 120]] },
+  { name: "아런 누가크래커", area: "시먼딩", mrt: "시먼역", cat: "쇼핑", url: "https://maps.app.goo.gl/6Lz1oPoxMbwW5Qpw6", notes: ["퐁신 쫀득 바삭한 스노우Q 필수", "많이 달지 않고 담백한데 맛있음", "매장이 여러 곳이라 지도에서 확인하고 가까운 곳 방문 추천"], menu: [] },
+  { name: "시먼망고빙수", area: "시먼딩", mrt: "시먼역", cat: "카페·디저트", url: "https://maps.app.goo.gl/GEjTtR1GqyGMHgBT7", notes: ["5월~9월(길면 10월 초)까지만 생망고", "비수기엔 냉동 망고지만 해동돼서 나오고, 얼음·아이스크림까지 망고맛 가득"], menu: [["망고빙수", 280]] },
+  { name: "황지아훠궈", area: "시먼딩", mrt: "시먼역", cat: "식사", url: "https://maps.app.goo.gl/XwxbszQFCkETwehe9", notes: ["훠궈, 과일, 하겐다즈, 음료, 술까지 모두 무한리필", "재료 퀄리티가 좋음"], menu: [["1인", 1100]] },
+  { name: "스린야시장", area: "스린", mrt: "젠탄역", cat: "야시장·간식", url: "https://maps.app.goo.gl/P2qJqVtfZbTFJLar7", notes: ["다양한 먹거리와 볼거리가 있는 곳"], menu: [["버섯구이", 120], ["찹쌀소시지", 80]] },
+];
+const CATS = ["전체", "식사", "카페·디저트", "야시장·간식", "쇼핑"];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = n => n.toLocaleString("ko-KR");
+const won = n => fmt(Math.round(n * RATE / 100) * 100);
+const krw = p => typeof p === "number" ? "≈ ₩" + won(p) : "≈ ₩" + p.split("~").map(Number).map(won).join("~");
+const nums = p => p.menu.flatMap(([, v]) => typeof v === "number" ? [v] : v.split("~").map(Number));
+const pin = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+const chev = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+
+const priceRow = ([item, price]) => `<div class="row"><span class="item">${esc(item)}</span><span class="price">NT$ ${typeof price === "number" ? fmt(price) : esc(price)}</span><span class="krw">${krw(price)}</span></div>`;
+
+function menuBlock(p) {
+  if (!p.menu.length) return "";
+  if (p.menu.length === 1) return `<div class="single">${priceRow(p.menu[0])}</div>`;
+  const n = nums(p), lo = Math.min(...n), hi = Math.max(...n);
+  return `<div class="range"><span class="label">메뉴당</span><span class="nt">NT$ ${fmt(lo)}~${fmt(hi)}</span><span class="kr">≈ ₩${won(lo)}~${won(hi)}</span></div>
+    <details class="menu-wrap"><summary>주문한 메뉴 ${p.menu.length}개 보기${chev}</summary><div class="menu">${p.menu.map(priceRow).join("")}</div></details>`;
+}
+
+function card(p, i) {
+  return `<article class="card" data-cat="${esc(p.cat)}">
+    <div class="board">
+      <div class="board-top"><span class="cat">${esc(p.cat)}</span><span class="where">${pin}${esc(p.area)} · MRT ${esc(p.mrt)}</span></div>
+      <h2>${esc(p.name)}${p.sub ? `<span class="sub">${esc(p.sub)}</span>` : ""}</h2>
+    </div>
+    <div class="body">
+      <ul class="notes">${p.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
+      ${menuBlock(p)}
+      <a class="map" href="${esc(p.url)}" target="_blank" rel="noopener">${pin}구글 지도에서 보기 ↗</a>
+    </div>
+  </article>`;
+}
+
+let cat = "전체";
+try { const c = localStorage.getItem("taipei-night-filter"); if (CATS.includes(c)) cat = c; } catch (e) {}
+
+const match = (p, c) => c === "전체" || p.cat === c;
+
+function render() {
+  document.getElementById("cat-filters").innerHTML = CATS.map((v, i) => {
+    const n = PLACES.filter(p => match(p, v)).length;
+    return `<button class="chip" type="button" id="cat-${i}" aria-pressed="${v === cat}" data-cat="${v}">${v}<span class="n">${n}</span></button>`;
+  }).join("");
+  const list = PLACES.map((p, i) => [p, i]).filter(([p]) => match(p, cat));
+  document.getElementById("result").innerHTML = `${esc(cat)} <b>${list.length}곳</b>`;
+  document.getElementById("list").innerHTML = list.map(([p, i]) => card(p, i)).join("");
+}
+document.getElementById("cat-filters").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  cat = b.dataset.cat;
+  try { localStorage.setItem("taipei-night-filter", cat); } catch (e) {}
+  render();
+  const list = document.getElementById("list");
+  if (list.getBoundingClientRect().top < 0) list.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+});
+render();
+</script>
+</body>
+</html>
